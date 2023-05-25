@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- aframe script should be in header and must be before a-scene -->
+      <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="texture" src="src/MoneyCard.png"/>
+      </a-assets>
+
+      <a-box
+        src="#texture"
+        position="0 1.5 -2"
+        scale="1 1.5 0.02"
+        animation="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
+      ></a-box>
+
+      <a-sky color="#fff"></a-sky>
+    </a-scene>
+  </body>
+</html>  
