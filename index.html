@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- aframe script should be in header and must be before a-scene -->
       <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+      <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script> 
     <meta charset="UTF-8" />
   </head>
   <body>
@@ -11,14 +13,38 @@
         <img id="texture" src="src/MoneyCard.png"/>
       </a-assets>
 
-      <a-box
+      <a-entity look-controls="wasd-controls-enabled: false;">
+        <a-box
+        clickhandler="txt:card"
+        id="box"
         src="#texture"
-        position="0 1.5 -2"
+        position="0 5 -2"
         scale="1 1.5 0.02"
-        animation="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
+        animation__down="property: position;from:0 5 -2; to: 0 2 -2;dur: 1000"
+        animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
       ></a-box>
 
-      <a-sky color="#fff"></a-sky>
-    </a-scene>
+      </a-entity>
+    
+      <a-entity cursor="rayOrigin:mouse"></a-entity> 
+
+    </a-scene> 
+    <script>
+      AFRAME.registerComponent('clickhandler', {
+          schema: {
+              txt: {default:'default'}
+          },        
+          init: function () {
+              var data = this.data;
+              var el = this.el;        
+              el.addEventListener('click', function () {            
+                  this.setAttribute("animation__up", "property: position;from:0 2 -2; to: 0 5 -2;dur: 1000")
+                  setTimeout(function() {
+                    document.querySelector("#box").setAttribute("animation__down_again","property: position;from:0 5 -2; to: 0 2 -2;dur: 1000")
+                  }, 3000);
+              });        
+          }
+          });
+      </script>     
   </body>
 </html>  
