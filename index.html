@@ -1,46 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- aframe script should be in header and must be before a-scene -->
-      <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-      <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script> 
-    <meta charset="UTF-8" />
-  </head>
-  <body>
-    <a-scene>
-      <a-assets>
-        <img id="texture" src="src/MoneyCard.png"/>
-      </a-assets>
-
-      <a-entity cursor="rayOrigin:mouse" camera>
-        <a-box
-          clickhandler="txt:card"
-          id="card"
-          src="#texture"
-          scale="1 1.5 0.02"
-          animation__down="property: position;from:0 3 -2; to: 0 0 -2;dur: 1000"
-          animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
-        ></a-box>
-      </a-entity>
-    
-    </a-scene> 
-    <script>
-      AFRAME.registerComponent('clickhandler', {
-          schema: {
-              txt: {default:'default'}
-          },        
-          init: function () {
-              var data = this.data;
-              var el = this.el;        
-              el.addEventListener('click', function () {            
-                  this.setAttribute("animation__up", "property: position;from:0 0 -2; to: 0 3 -2;dur: 1000")
-                  setTimeout(function() {
-                    document.querySelector("#card").setAttribute("animation__down_again","property: position;from:0 3 -2; to: 0 0 -2;dur: 1000")
-                  }, 3000);
-              });        
-          }
-          });
-      </script>     
-  </body>
-</html>  
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- source flyght: https://github.com/aj1thkr1sh/flyght/ -->
+	<script type="text/javascript" src="https://unpkg.com/flyght"></script>
+	<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script> 
+	<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<title>Pahlawan Rupiah</title>
+	<style>
+		body, html.a-fullscreen body{
+			margin: auto;
+			width: 25%;
+		}
+		@media only screen and (max-width: 768px) {
+			body, html.a-fullscreen body{
+				width: 100%;
+			}
+		}
+		.a-loader-title {
+			color: transparent;
+		}
+		.container{
+			width: 95%;
+		}
+		/* .mindar-ui{
+			display: none;
+		} */
+	</style>
+</head>
+<body>
+	<!-- Content surface -->
+	<div id="content">
+	    Default content of my website.
+	</div>
+	<!-- End of content surface -->
+	<script type="text/javascript" src="src/js/script.js"></script>
+	<script type="text/javascript">
+		Flyght.init({
+		  idElement : "content",
+		  urlConfiguration : [ {
+		    hash : "",
+		    url : "menu.html",
+		    type : "GET"
+		  }, {
+		    hash : "#open",
+		    url : "open.html",
+		    type : "GET"
+		  }, {
+		    hash : "#scan",
+		    url : "scan.html",
+		    type : "GET"
+		  },  {
+		    hash : "#heroes",
+		    url : "heroes.html",
+		    type : "GET"
+		  }, {
+		    hash : "#about",
+		    url : "about.html",
+		    type : "GET"
+		  }]
+		});
+	</script>
+</body>
+</html>

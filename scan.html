@@ -1,0 +1,36 @@
+<div id="scan" style="bottom: 0;
+left: 0;
+position: fixed;
+right: 0;
+top: 0;">
+<a-scene loading-screen="dotsColor: red; backgroundColor: black" mindar-image="imageTargetSrc: src/target/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-assets>
+        <img id="texture" src="src/MoneyCard.png"/>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity id="1000_o" mindar-image-target="targetIndex: 1">
+        <a-box
+            clickhandler="txt:card"
+            id="card"
+            src="#texture"
+            scale="1 1.5 0.02"
+            animation="property: rotation;from:0 0 0; to:0 180 0; loop: true; dur: 2000"
+        ></a-box>
+    </a-entity>
+
+    <a-entity id="5000_n" mindar-image-target="targetIndex: 4">
+        <a-box
+            clickhandler="txt:card"
+            id="card"
+            src="#texture"
+            scale="1 1.5 0.02"
+            animation="property: rotation;from:0 0 0; to:0 180 0; loop: true; dur: 2000"
+        ></a-box>
+    </a-entity>
+
+    <a-entity cursor="rayOrigin:mouse"></a-entity>
+</a-scene>
+</div>   
+

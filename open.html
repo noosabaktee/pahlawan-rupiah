@@ -1,0 +1,27 @@
+<div id="open">
+  <a-scene>
+    <a-assets>
+      <img id="texture" src="src/MoneyCard.png"/>
+    </a-assets>
+  
+    <a-entity cursor="rayOrigin:mouse" camera>
+      <a-box
+        open="txt:card"
+        id="card"
+        src="#texture"
+        scale="1 1.5 0.02"
+        position="0 3 -2"""
+        animation__down="property: position;to: 0 0.3 -2;dur: 1000"
+        animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
+      ></a-box>
+      <a-box
+        toabout="txt:btn"
+        id="next-btn"
+        src="src/ui/Next.png"
+        scale="0.8 0.2 0.02"
+        visible="false"
+      ></a-box>
+      <a-text id="click-text" value="click card to open" color="grey" width="3" animation__up="property: position;from:-0.5 -3 -2; to:-0.5 -1 -2;dur: 1000" ></a-text>    
+    </a-entity>
+  </a-scene> 
+</div>
