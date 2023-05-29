@@ -52,31 +52,74 @@ function newCharacter(){
     }
 }
 
-AFRAME.registerComponent('open', {
-    schema: {
-        txt: {default:'default'}
-    },        
-    init: function () {
-        var data = this.data;
-        var el = this.el;        
-        el.addEventListener('click', function () {            
-            // Animation up
-            this.setAttribute("animation__up", "property: position;to: 0 3 -2;dur: 1000")
-            document.querySelector("#click-text").setAttribute("animation__down","property: position;from:-0.5 -1 -2;to:-0.5 -3 -2; dur: 1000")
-            setTimeout(function() {
-                // Set texture
-                var char = localStorage.getItem("char")
-                document.querySelector("#card").setAttribute("src", "src/Unlocked/"+char+".png")
-                // Down Again
-                document.querySelector("#card").setAttribute("animation__down_again","property: position;to: 0 0.3 -2;dur: 1000")
-                // Show next btn
-                document.querySelector("#next-btn").setAttribute("visible", "true")
-                document.querySelector("#next-btn").setAttribute("animation__up","property: position;from:0 -3 -2; to: 0 -1 -2;dur: 1000")
-            }, 3000);
-            newCharacter()
-        });        
+function confettiEffect(){
+    const end = Date.now() + 7 * 1000;
+
+    (function frame() {
+    confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+    });
+
+    confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+    });
+
+    if (Date.now() < end) {
+        requestAnimationFrame(frame);
     }
-});
+    })();
+}
+
+var hooray = new Audio('src/audio/Hooray.mp3');
+var whoosh = new Audio('src/audio/Whoosh.mp3');
+var click = new Audio('src/audio/Click.mp3');
+var boom = new Audio('src/audio/Boom.mp3');
+boom.volume = 0.5;
+var opened = false
+
+function open(){
+    if(!opened){
+        // Animation up
+        whoosh.play()
+        document.querySelector("#open-card").setAttribute("animation__up", "property: position;to: 0 3 -2;dur: 1000")
+        document.querySelector("#click-text").setAttribute("animation__down","property: position;from:-0.4 -1 -2;to:-0.4 -3 -2; dur: 1000")
+        setTimeout(function() {
+            // Set texture
+            var char = localStorage.getItem("char")
+            document.querySelector("#open-card").setAttribute("src", "src/unlocked/"+char+".png")
+            // Down Again
+            document.querySelector("#open-card").setAttribute("animation__down_again","property: position;to: 0 0.3 -2;easing: easeInCubic;dur: 700")
+            // Show next btn
+            document.querySelector("#next-btn").setAttribute("visible", "true")
+            document.querySelector("#next-btn").setAttribute("animation__up","property: position;from:0 -3 -2; to: 0 -1 -2;dur: 700")
+            boom.play()
+            setTimeout(function(){
+                confettiEffect()
+                hooray.play()
+            }, 1000)
+        }, 3000);
+        newCharacter()
+    }
+    opened = true
+}
+
+function ARcard(){
+    var char = document.querySelector("#ar-card").parentElement.getAttribute('id')
+    localStorage.setItem("char", char)
+    console.log(localStorage.getItem("char"))
+    window.location.href = "#open";
+}
+
+function next(){
+
+}
+
 
 AFRAME.registerComponent('clickhandler', {
     schema: {
@@ -86,25 +129,16 @@ AFRAME.registerComponent('clickhandler', {
         var data = this.data;
         var el = this.el;        
         el.addEventListener('click', function () {     
-            var char = el.parentElement.getAttribute('id')
-            localStorage.setItem("char", char)
-            console.log(localStorage.getItem("char"))
-            window.location.href = "#open";
+            if(data.txt == "open-card"){
+                open()
+            }else if(data.txt == "ar-card"){
+                ARcard()
+            }else if(data.txt == "next-btn"){
+                click.play()
+                localStorage.setItem("about", localStorage.getItem("char"))
+                window.location.href = "#about";
+            }
         });        
     }
 });
 
-
-AFRAME.registerComponent('toabout', {
-    schema: {
-        txt: {default:'default'}
-    },        
-    init: function () {
-        var data = this.data;
-        var el = this.el;        
-        el.addEventListener('click', function () {     
-            localStorage.setItem("about", localStorage.getItem("char"))
-            window.location.href = "#about";
-        });        
-    }
-});
