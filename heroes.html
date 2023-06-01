@@ -1,35 +1,43 @@
-<nav>
-    <div class="nav-wrapper">
-        <a class="brand-logo center">Logo</a>
-        <ul id="nav-mobile" class="lef">
-        <li><a href="#">Back</a></li>
-        </ul>
-    </div>
-</nav>
-    
-<div id="heroes" class="row">
-
-    <script>
-
-    var open = JSON.parse(localStorage.getItem("open"))
-    var heroes = ["1000_o","1000_n","2000_o","2000_n","5000_o","5000_n","10000_o","10000_n","20000_o","20000_n","50000_o","50000_n","100000_o","100000_n"]
-    
-    function toAbout(param){
-        if(open.includes(param)){
-            localStorage.setItem("about", param)
-            window.location.href = "#about"
-        }
-    }
-        
-    var html = ""
-    heroes.forEach((item,index) => {
-        var dir = "locked"
-        if(open.includes(item)){
-            dir = "unlocked"
-        }
-        html += `<img class="col m4 s6" style="margin-top: 20px" src="src/${dir}/${item}.png" width="200" onclick="toAbout('${item}')" alt="hero"/>`
-    })
-    document.querySelector("#heroes").innerHTML = html
-    
-    </script>
+<div class="page" data-name="createreport"> 
+        <div class="navbar color-white text-color-white" >
+            <div class="navbar-bg bg-color-red"></div>
+            <div class="navbar-inner">
+              <div class="left">
+                <a class="link" href="/">
+                  <i class="icon icon-back"></i>
+                  <span class="if-not-md">Back</span>
+                </a>
+              </div>
+              <div class="title">My Heroes</div>
+              <div class="right"></div>
+            </div>
+        </div>
+        <div class="page-content container">  
+            <div id="heroes" class="row">
+            
+                <script>
+            
+                var open = JSON.parse(localStorage.getItem("open"))
+                var heroes = ["1000_o","1000_n","2000_o","2000_n","5000_o","5000_n","10000_o","10000_n","20000_o","20000_n","50000_o","50000_n","100000_o","100000_n"]
+                
+                function toAbout(param){
+                    if(open.includes(param)){
+                        localStorage.setItem("about", param)
+                        app.views.main.router.navigate("/about/");
+                    }
+                }
+                    
+                var html = ""
+                heroes.forEach((item,index) => {
+                    var dir = "locked"
+                    if(open.includes(item)){
+                        dir = "unlocked"
+                    }
+                    html += `<img class="col-50" style="margin-top: 20px" src="src/${dir}/${item}.png" width="200" onclick="toAbout('${item}')" alt="hero"/>`
+                })
+                document.querySelector("#heroes").innerHTML = html
+                
+                </script>
+            </div>
+      </div>
 </div>

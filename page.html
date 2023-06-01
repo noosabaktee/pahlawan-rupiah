@@ -23,7 +23,6 @@
       body{
         margin: auto;
         width: 25%;
-        box-sizing: border-box;
       }
       @media only screen and (max-width: 768px) {
         body{
@@ -37,24 +36,31 @@
         margin: auto;
         width: 95%;
       }
-      .button{
-        width: 250px;
-        margin: 20px auto;
-      }
     </style>
   </head>
   <body>
     <!-- App root element -->
     <div id="app">
+
       <!-- Your main view, should have "view-main" class -->
       <div class="view view-main">
-        <div id="confetti"></div>
         <!-- Initial Page, "data-name" contains page name -->
+        <div data-name="home" class="page">
+          <!-- Scrollable page content -->
+          <div class="page-content">
+            <p>Page content goes here</p>
+            <!-- Link to another page -->
+            <a href="/open/">Open app</a>
+            <a href="/heroes/">Hero app</a>
+            <a href="/scan/">Scan app</a>
+          </div>
+        </div>
       </div>
     </div>
     <!-- Path to Framework7 Library Bundle JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/framework7/5.7.14/js/framework7.bundle.min.js" integrity="sha512-mNNXnGROyRNv73WMhW121IBwZihmQe7dJ1BHQOCmjw1kyruG3anachQcKYwopFwm9281+qAN5UmbBMLB839zRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Path to your app js-->
     <script type="text/javascript" src="src/js/my-app.js"></script>
+    <script type="text/javascript" src="src/js/script.js"></script>
   </body>
 </html>

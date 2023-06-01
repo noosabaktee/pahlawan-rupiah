@@ -1,29 +1,33 @@
-<div id="open">
-  <a-scene>
-    <a-assets>
-      <img id="texture" src="src/MoneyCard.png"/>
-    </a-assets>
-  
-    <a-entity position="0 1.5 -3" particle-system="preset: snow"></a-entity>
-
-    <a-entity cursor="rayOrigin:mouse" camera>
-      <a-box
-        clickhandler="txt:open-card"
-        id="open-card"
-        src="#texture"
-        scale="1 1.5 0.02"
-        position="0 3 -2"
-        animation__down="property: position;to: 0 0.3 -2;dur: 1000"
-        animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
-      ></a-box>
-      <a-box
-        clickhandler="txt:next-btn"
-        id="next-btn"
-        src="src/ui/Next.png"
-        scale="0.8 0.2 0.02"
-        visible="false"
-      ></a-box>
-      <a-text id="click-text" value="click card to open" color="black" width="2" animation__up="property: position;from:-0.4 -3 -2; to:-0.4 -1 -2;dur: 1000" ></a-text>    
-    </a-entity>
-  </a-scene> 
+<div class="page" data-name="createreport"> 
+  <div class="page-content">
+    <div id="open">
+        <a-scene vr-mode-ui="enabled: false">
+          <a-assets>
+            <img id="texture" src="src/MoneyCard.png"/>
+          </a-assets>
+        
+          <a-entity position="0 1.5 -3" particle-system="preset: snow"></a-entity>
+      
+          <a-entity cursor="rayOrigin:mouse" camera>
+            <a-box
+              clickhandler="txt:open-card"
+              id="open-card"
+              src="#texture"
+              scale="1 1.5 0.02"
+              position="0 3 -2"
+              animation__down="property: position;to: 0 0.3 -2;dur: 1000"
+              animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
+            ></a-box>
+            <a-box
+              clickhandler="txt:next-btn"
+              id="next-btn"
+              src="src/ui/Next.png"
+              scale="0.8 0.2 0.02"
+              visible="false"
+            ></a-box>
+            <a-text id="click-text" value="click card to open" color="black" width="2" animation__up="property: position;from:-0.4 -3 -2; to:-0.4 -1 -2;dur: 1000" ></a-text>    
+          </a-entity>
+        </a-scene> 
+    </div>
+  </div>
 </div>

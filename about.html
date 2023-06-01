@@ -1,24 +1,41 @@
-<div id="about">
-    <script>
-        fetch('src/pahlawan.json')
-        .then((response) => response.json())
-        .then((json) => {
-            var html = ""
-            var about = localStorage.getItem("about")
-            var data = json[about]
-            console.log(data)
-            html += `<img src="src/about/${about}.png" width="100%" alt="hero"/>`
-            html += `<div id="about-content" class="container">`
-            html += `<h4>${data["name"]}</h4>`
-            html += `<h5>${data["as"]}</h5>`
-            html += `<p><b>Also Known As</b><br>${data["aka"]}</p>`
-            html += `<p><b>Born</b><br>${data["born"]}</p>`
-            html += `<p><b>Died</b><br>${data["died"]}</p>`
-            html += `<p><b>Gender</b><br>${data["gender"]}</p>`
-            html += `<p><b>Ascension Year</b><br>${data["ascension"]}</p>`
-            html += `<p style="text-align: justify"><b>About</b><br>${data["about"]}</p>`
-            html += `</div>`
-            document.querySelector("#about").innerHTML = html
-        });
-    </script>
-</div>
+<div class="page" data-name="createreport"> 
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+              <div class="left">
+                <a class="link" href="/heroes/">
+                  <i class="icon icon-back"></i>
+                  <span class="if-not-md">Back</span>
+                </a>
+              </div>
+              <div class="title">About</div>
+              <div class="right"></div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div id="about" class="lazy lazy-fade-in">         
+            <script>
+                fetch('src/pahlawan.json')
+                .then((response) => response.json())
+                .then((json) => {
+                    var about = localStorage.getItem("about")
+                    var data = json[about]
+                    console.log(data)
+                    var html = `
+                    <img src="src/about/${about}.png" width="100%" alt="hero"/>
+                    <div id="about-content" class="container">
+                        <h4>${data["name"]}</h4>
+                        <h5>${data["as"]}</h5>
+                        <p><b>Also Known As</b><br>${data["aka"]}</p>
+                        <p><b>Born</b><br>${data["born"]}</p>
+                        <p><b>Died</b><br>${data["died"]}</p>
+                        <p><b>Gender</b><br>${data["gender"]}</p>
+                        <p><b>Ascension Year</b><br>${data["ascension"]}</p>
+                        <p style="text-align: justify"><b>About</b><br>${data["about"]}</p>
+                    </div>`
+                    document.querySelector("#about").innerHTML = html
+                });
+            </script>
+            </div>
+        </div>
+  </div>
