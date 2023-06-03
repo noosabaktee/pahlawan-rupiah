@@ -67,7 +67,7 @@ var app = new Framework7({
       url: './open.html',
       on: {
         pageInit: function (e, page) {
-          removeScript()
+          executeScript(document.getElementById('open').innerHTML)
         },
       }
     }, {
@@ -108,13 +108,15 @@ function newCharacter(){
   let char = localStorage.getItem("char")
   // Jika karakter belum ada maka tambahkan
   if(!open.includes(char)){   
+    open.push(char)
+    console.log(open.toString())
+    localStorage.setItem("open",JSON.stringify(open))
+    setTimeout(function(){
       app.toast.create({
         text: 'New Character Unlocked',
         closeTimeout: 2000,
       }).open();  
-      open.push(char)
-      console.log(open.toString())
-      localStorage.setItem("open",JSON.stringify(open))
+    }, 3000)
   }
 }
 
@@ -151,14 +153,12 @@ function openCard(){
   if(!opened){
       // Animation up
       whoosh.play()
-      document.querySelector("#open-card").setAttribute("animation__up", "property: position;to: 0 3 -2;dur: 1000")
+      // locked card up
+      document.querySelector("#locked-card").setAttribute("animation__up", "property: position;to: 0 3 -2;dur: 1000")
       document.querySelector("#click-text").setAttribute("animation__down","property: position;from:-0.4 -1 -2;to:-0.4 -3 -2; dur: 1000")
       setTimeout(function() {
-          // Set texture
-          let char = localStorage.getItem("char")
-          document.querySelector("#open-card").setAttribute("src", "src/unlocked/"+char+".png")
-          // Down Again
-          document.querySelector("#open-card").setAttribute("animation__down_again","property: position;to: 0 0.3 -2;easing: easeInCubic;dur: 700")
+          // unlocked card down
+          document.querySelector("#unlocked-card").setAttribute("animation__down","property: position;to: 0 0.3 -2;easing: easeInCubic;dur: 700")
           // Show next btn
           document.querySelector("#next-btn").setAttribute("visible", "true")
           document.querySelector("#next-btn").setAttribute("animation__up","property: position;from:0 -3 -2; to: 0 -1 -2;dur: 700")
@@ -174,24 +174,6 @@ function openCard(){
   opened = true
 }
 
-AFRAME.registerComponent('clickhandler', {
-  schema: {
-      txt: {default:'default'}
-  },        
-  init: function () {
-      var data = this.data;
-      var el = this.el;        
-      el.addEventListener('click', function () {     
-          if(data.txt == "open-card"){
-              openCard()
-          }else if(data.txt == "next-btn"){
-              endConfetti = 0
-              opened = false
-              click.play()
-              localStorage.setItem("about", localStorage.getItem("char"))
-              app.views.main.router.navigate("/about/");
-          }
-      });        
-  }
-});
+
+
 

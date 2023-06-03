@@ -12,8 +12,8 @@
           <a-entity cursor="rayOrigin:mouse" camera>
               <a-image scale="2 2 0.1" position="0 0.5 -3" src="#garuda"></a-image>
             <a-box
-              clickhandler="txt:open-card"
-              id="open-card"
+              id="locked-card"
+              class="clickable"
               src="#texture"
               scale="1 1.5 0.02"
               position="0 3 -2"
@@ -21,8 +21,15 @@
               animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
             ></a-box>
             <a-box
-              clickhandler="txt:next-btn"
+              id="unlocked-card"
+              src=""
+              scale="1 1.5 0.02"
+              position="0 3 -2"
+              animation__rotate="property: rotation;from:0 0 0; to: 0 180 0; loop: true; dur: 5000"
+            ></a-box>
+            <a-box
               id="next-btn"
+              class="clickable"
               src="src/ui/Next.png"
               scale="0.8 0.2 0.02"
               visible="false"
@@ -30,6 +37,20 @@
             <a-text id="click-text" value="click card to open" color="black" width="2" animation__up="property: position;from:-0.4 -3 -2; to:-0.4 -1 -2;dur: 1000" ></a-text>    
           </a-entity>
         </a-scene> 
+        <script>
+          // Ubah texture unlocked card
+          document.querySelector("#unlocked-card").setAttribute("src", "src/unlocked/"+localStorage.getItem("char")+".png")           
+          document.querySelector("#locked-card").addEventListener("click", function(){
+            openCard()
+          })
+          document.querySelector("#next-btn").addEventListener("click", function(){
+            endConfetti = 0
+            opened = false
+            click.play()
+            localStorage.setItem("about", localStorage.getItem("char"))
+            app.views.main.router.navigate("/about/");
+          })
+        </script>
     </div>
   </div>
 </div>

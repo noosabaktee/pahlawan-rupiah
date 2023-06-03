@@ -13,8 +13,19 @@
             </div>
         </div>
         <div class="page-content">
-            <div id="about" class="lazy lazy-fade-in">         
+            <div id="about">  
+              <div style="margin: 0;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);">
+                <div class="preloader color-red"></div>
+              </div>      
             <script>
+                function showAbout(){
+                  document.querySelector("#about-content").style.display = "block"
+                  document.querySelector("#img-hero").style.display = "block"
+                }
                 fetch('src/pahlawan.json')
                 .then((response) => response.json())
                 .then((json) => {
@@ -22,8 +33,8 @@
                     var data = json[about]
                     console.log(data)
                     var html = `
-                    <img src="src/about/${about}.png" width="100%" alt="hero"/>
-                    <div id="about-content" class="container">
+                    <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()" style="display: none"/>
+                    <div id="about-content" class="container" style="display: none">
                         <h1>${data["name"]}</h1>
                         <h2 style="color: #71797E;margin-top: -20px;">${data["as"]}</h2>
                         <p><b>Also Known As</b><br>${data["aka"]}</p>

@@ -13,14 +13,6 @@ body{
 .button{
     margin: 40px 0;
 }
-#card-menu{
-    position:absolute;
-    margin-top: -20px;
-    width:100px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%)
-}
 #footer{
     position: absolute;
     bottom:10px;
@@ -38,24 +30,15 @@ body{
     --f7-font-family: 'Poppins', sans-serif;
 }
 /* mobile */
-@media only screen and (max-width: 768px ) {
+@media only screen and (max-device-width: 768px ) {
     body{
         width: 100%;
     }
-    #card-menu{
-        margin-top: 0;
-        position:absolute;
-        width:150px;
-    }
 }
+
 /* ipad */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     body{
         width: 60%;
-    }
-    #card-menu{
-        margin-top: 50px;
-        position:absolute;
-        width:150px;
     }
 }
