@@ -1,7 +1,7 @@
 <div class="page" data-name="createreport"> 
     <div class="page-content">
         <div id="scan" style="bottom: 0;left: 0;position: fixed;right: 0;top: 0;">
-        <a class="link back color-white" style="margin: 10px">
+        <a class="link color-white" href="/" id="close-cam" style="margin: 10px">
             <i class="f7-icons color-white">xmark</i>
         </a>
         <a-scene loading-screen="dotsColor: red; backgroundColor: black" mindar-image="imageTargetSrc: src/target/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
@@ -11,29 +11,36 @@
         
             <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
         
+            <a-entity id="target"></a-entity>
         
-            <a-entity id="1000_o" mindar-image-target="targetIndex: 1">
-                <a-box
-                    onclick="ARcard(this)"
-                    class="clickable ar-card"
-                    src="#texture"
-                    scale="1 1.5 0.02"
-                    animation="property: rotation;from:0 0 0; to:0 180 0; loop: true; dur: 2000"
-                ></a-box>
-            </a-entity>
-        
-            <a-entity id="5000_n" mindar-image-target="targetIndex: 4">
-                <a-box
-                    onclick="ARcard(this)"
-                    class="clickable ar-card"
-                    src="#texture"
-                    scale="1 1.5 0.02"
-                    animation="property: rotation;from:0 0 0; to:0 180 0; loop: true; dur: 2000"
-                ></a-box>
-            </a-entity>
-        
-            <a-entity cursor="rayOrigin:mouse"></a-entity>
         </a-scene>
+        <script>
+            var sceneEl = document.querySelector('a-scene');
+            var arSystem = sceneEl.systems["mindar-image-system"];
+            var heroes = ["1000_n","1000_o","2000_n","2000_o","5000_n","5000_o","10000_n","10000_o","20000_n","20000_o","50000_n","50000_o","100000_n","100000_o"]
+            var html = ""
+            heroes.forEach((item,index) => {
+                html += `
+                <a-entity id="${item}" mindar-image-target="targetIndex: ${index}">
+                    <a-box
+                        class="clickable ar-card"
+                        src="#texture"
+                        scale="1 1.5 0.02"
+                        animation="property: rotation;from:0 0 0; to:0 180 0; loop: true; dur: 2000"
+                    ></a-box>
+                </a-entity>
+                `
+            })
+            document.querySelector("#target").innerHTML = html
+            document.querySelector("#close-cam").addEventListener("click", function(){
+                arSystem.stop(); // stop
+            })
+            document.querySelectorAll(".ar-card").forEach(el => el.addEventListener("click", event => {
+                let char = el.parentElement.getAttribute('id')
+                localStorage.setItem("char", char)
+                app.views.main.router.navigate("/open/");
+            }));
+        </script>
         </div>   
   </div>
 </div>

@@ -4,11 +4,13 @@
         <a-scene vr-mode-ui="enabled: false">
           <a-assets>
             <img id="texture" src="src/MoneyCard.png"/>
+            <img id="garuda" src="src/ui/GarudaBG.png">
           </a-assets>
         
           <a-entity position="0 1.5 -3" particle-system="preset: snow"></a-entity>
       
           <a-entity cursor="rayOrigin:mouse" camera>
+              <a-image scale="2 2 0.1" position="0 0.5 -3" src="#garuda"></a-image>
             <a-box
               clickhandler="txt:open-card"
               id="open-card"

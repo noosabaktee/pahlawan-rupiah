@@ -16,6 +16,12 @@ boom.volume = 0.5;
 // jika opened true maka ketika mengklik kartu tidak akan naik keatas lagi
 let opened = false
 
+const divs = document.querySelectorAll('.button');
+
+function clickSound(){
+  click.play()
+}
+
 function removeScript(){
   document.querySelectorAll(".mindar-ui-overlay").forEach(el => el.remove());
   document.querySelectorAll(".new-script").forEach(el => el.remove());
@@ -69,7 +75,7 @@ var app = new Framework7({
       url: './scan.html',
       on: {
         pageInit: function (e, page) {
-          executeScript(document.getElementById('about').innerHTML)
+          executeScript(document.getElementById('scan').innerHTML)
         },
       }
     }, {
@@ -102,6 +108,10 @@ function newCharacter(){
   let char = localStorage.getItem("char")
   // Jika karakter belum ada maka tambahkan
   if(!open.includes(char)){   
+      app.toast.create({
+        text: 'New Character Unlocked',
+        closeTimeout: 2000,
+      }).open();  
       open.push(char)
       console.log(open.toString())
       localStorage.setItem("open",JSON.stringify(open))
@@ -184,12 +194,4 @@ AFRAME.registerComponent('clickhandler', {
       });        
   }
 });
-
-// Click ar card
-function ARcard(element){
-  let char = element.parentElement.getAttribute('id')
-  localStorage.setItem("char", char)
-  console.log(localStorage.getItem("char"))
-  window.location.href = "#open";
-}
 
