@@ -13,6 +13,20 @@ body{
 .button{
     margin: 40px 0;
 }
+#scan{
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+#close-cam{
+    margin: 10px;
+    background-color: black;
+    border-radius: 5px;
+    padding: 2px;
+    opacity: 80%;
+}
 #footer{
     position: absolute;
     bottom:10px;
