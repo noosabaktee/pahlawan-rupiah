@@ -113,7 +113,7 @@ function newCharacter(){
     localStorage.setItem("open",JSON.stringify(open))
     setTimeout(function(){
       app.toast.create({
-        text: 'New Character Unlocked',
+        text: 'New hero unlocked',
         closeTimeout: 2000,
       }).open();  
     }, 3000)

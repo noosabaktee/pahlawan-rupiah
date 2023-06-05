@@ -13,30 +13,51 @@
             </div>
         </div>
         <div class="page-content container">  
-            <div id="heroes" class="row" style="padding-bottom: 20px">
-            
+            <p id="loading-heroes" style="top: 50%;
+            transform: translateY(-50%);position: relative;">
+                <span class="progressbar-infinite color-red"></span>
+            </p>
+            <div id="heroes" class="row" style="padding-bottom: 20px;display: none;">
                 <script>
-            
-                var open = JSON.parse(localStorage.getItem("open"))
-                var heroes = ["1000_o","1000_n","2000_o","2000_n","5000_o","5000_n","10000_o","10000_n","20000_o","20000_n","50000_o","50000_n","100000_o","100000_n"]
+                    var open = JSON.parse(localStorage.getItem("open"))
+                    var heroes = ["1000_o","1000_n","2000_o","2000_n","5000_o","5000_n","10000_o","10000_n","20000_o","20000_n","50000_o","50000_n","100000_o","100000_n"]
                 
-                function toAbout(param){
-                    if(open.includes(param)){
-                        localStorage.setItem("about", param)
-                        app.views.main.router.navigate("/about/");
+                    function toAbout(param){
+                        if(open.includes(param)){
+                            localStorage.setItem("about", param)
+                            app.views.main.router.navigate("/about/");
+                        }
                     }
-                }
-                    
-                var html = ""
-                heroes.forEach((item,index) => {
-                    var dir = "locked"
-                    if(open.includes(item)){
-                        dir = "unlocked"
+                        
+                    var html = ""
+                    heroes.forEach((item,index) => {
+                        var dir = "locked"
+                        if(open.includes(item)){
+                            dir = "unlocked"
+                        }
+                        html += `<img class="col-50" style="margin-top: 20px;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;" src="src/${dir}/${item}.png" width="200" onclick="toAbout('${item}')" alt="hero"/>`
+                    })
+                    document.querySelector("#heroes").innerHTML = html
+
+                    // If all images have loaded
+                    var imgs = document.images,
+                        len = imgs.length,
+                        counter = 0;
+
+                    [].forEach.call( imgs, function( img ) {
+                        if(img.complete)
+                        incrementCounter();
+                        else
+                        img.addEventListener( 'load', incrementCounter, false );
+                    } );
+
+                    function incrementCounter() {
+                        counter++;
+                        if ( counter === len ) {
+                            document.querySelector("#loading-heroes").style.display = "none"
+                            document.querySelector("#heroes").style.display = "flex"
+                        }
                     }
-                    html += `<img class="col-50" style="margin-top: 20px;box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;" src="src/${dir}/${item}.png" width="200" onclick="toAbout('${item}')" alt="hero"/>`
-                })
-                document.querySelector("#heroes").innerHTML = html
-                
                 </script>
             </div>
       </div>

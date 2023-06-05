@@ -3,7 +3,7 @@
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
               <div class="left">
-                <a class="link" href="/heroes/">
+                <a class="link color-black" href="/heroes/">
                   <i class="icon icon-back"></i>
                   <span class="if-not-md">Back</span>
                 </a>
@@ -13,16 +13,14 @@
             </div>
         </div>
         <div class="page-content">
+            <p id="loading-about" class="container" style="top: 50%;
+            transform: translateY(-50%);position: relative;">
+                <span class="progressbar-infinite color-red"></span>
+            </p>   
             <div id="about">  
-              <div style="margin: 0;
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);">
-                <div class="preloader color-red"></div>
-              </div>      
             <script>
                 function showAbout(){
+                  document.querySelector("#loading-about").style.display = "none"
                   document.querySelector("#about-content").style.display = "block"
                   document.querySelector("#img-hero").style.display = "block"
                 }
@@ -31,7 +29,6 @@
                 .then((json) => {
                     var about = localStorage.getItem("about")
                     var data = json[about]
-                    console.log(data)
                     var html = `
                     <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()" style="display: none"/>
                     <div id="about-content" class="container" style="display: none">
