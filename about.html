@@ -13,19 +13,22 @@
             </div>
         </div>
         <div class="page-content">
-            <div id="about" class="skeleton-text skeleton-effect-blink">  
-            <script>
+            <div id="about" class="skeleton-text skeleton-effect-blink"> 
+              <script>
                 function showAbout(){
+                  document.querySelector("#img-hero").style.display = "block"
+                  document.querySelector(".skeleton-block").style.display = "none"
                   document.querySelector("#about").removeAttribute("class")
                 }
                 fetch('src/pahlawan.json')
                 .then((response) => response.json())
                 .then((json) => {
-                    var about = localStorage.getItem("about")
-                    var data = json[about]
-                    var html = `
-                    <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()"/>
-                    <div id="about-content" class="container">
+                  var about = localStorage.getItem("about")
+                  var data = json[about]
+                  var html = `
+                  <div class="skeleton-block" style="width: 100%; height: 300px;"></div> 
+                  <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()" style="display; none"/>
+                  <div id="about-content" class="container">
                         <h1>${data["name"]}</h1>
                         <h2 style="color: #71797E;margin-top: -20px;">${data["as"]}</h2>
                         <p><b>Also Known As</b><br>${data["aka"]}</p>
