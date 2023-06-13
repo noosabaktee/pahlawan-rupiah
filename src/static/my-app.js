@@ -59,7 +59,7 @@ var app = new Framework7({
       url: './menu.html',
       on: {
         pageInit: function (e, page) {
-          removeScript()
+          executeScript(document.getElementById('menu').innerHTML)
         },
       }
     },{
@@ -76,7 +76,7 @@ var app = new Framework7({
       on: {
         pageInit: function (e, page) {
           executeScript(document.getElementById('scan').innerHTML)
-        },
+        }
       }
     }, {
       path: '/about/',
@@ -96,7 +96,6 @@ var app = new Framework7({
       }
     },
   ],
-  // ... other parameters
 });
 
 

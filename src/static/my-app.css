@@ -1,9 +1,9 @@
-body{
+#app{
     margin: auto;
     width: 25%;
     box-sizing: border-box;
 }
-.a-loader-title {
+.a-loader-title{
     color: transparent;
 }
 .container{
@@ -14,11 +14,10 @@ body{
     margin: 40px 0;
 }
 #scan{
-    bottom: 0;
-    left: 0;
+    height: 100%;
+    width: 100%;
     position: fixed;
-    right: 0;
-    top: 0;
+    left: 0;
 }
 #close-cam{
     margin: 10px;
@@ -27,12 +26,28 @@ body{
     padding: 2px;
     opacity: 80%;
 }
+#example{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+#scan-icon{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    opacity: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%)
+}
 #footer{
     position: absolute;
     bottom:10px;
     color: white;
     width: 100%;
     text-align: center;
+}
+.color-skeleton{
+    --f7-theme-color: #ccc
 }
 :root.md {
     --f7-font-family : 'Poppins', sans-serif;
@@ -45,14 +60,14 @@ body{
 }
 /* mobile */
 @media only screen and (max-device-width: 768px ) {
-    body{
+    #app{
         width: 100%;
     }
 }
 
 /* ipad */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-    body{
+    #app{
         width: 60%;
     }
 }

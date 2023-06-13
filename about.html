@@ -13,16 +13,10 @@
             </div>
         </div>
         <div class="page-content">
-            <p id="loading-about" class="container" style="top: 50%;
-            transform: translateY(-50%);position: relative;">
-                <span class="progressbar-infinite color-red"></span>
-            </p>   
-            <div id="about">  
+            <div id="about" class="skeleton-text skeleton-effect-blink">  
             <script>
                 function showAbout(){
-                  document.querySelector("#loading-about").style.display = "none"
-                  document.querySelector("#about-content").style.display = "block"
-                  document.querySelector("#img-hero").style.display = "block"
+                  document.querySelector("#about").removeAttribute("class")
                 }
                 fetch('src/pahlawan.json')
                 .then((response) => response.json())
@@ -30,8 +24,8 @@
                     var about = localStorage.getItem("about")
                     var data = json[about]
                     var html = `
-                    <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()" style="display: none"/>
-                    <div id="about-content" class="container" style="display: none">
+                    <img id="img-hero" src="src/about/${about}.png" width="100%" alt="hero" onload="showAbout()"/>
+                    <div id="about-content" class="container">
                         <h1>${data["name"]}</h1>
                         <h2 style="color: #71797E;margin-top: -20px;">${data["as"]}</h2>
                         <p><b>Also Known As</b><br>${data["aka"]}</p>
