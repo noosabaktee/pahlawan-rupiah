@@ -113,7 +113,7 @@ function newCharacter(){
     setTimeout(function(){
       app.toast.create({
         text: 'New hero unlocked',
-        closeTimeout: 2000,
+        closeTimeout: 3000,
       }).open();  
     }, 3000)
   }

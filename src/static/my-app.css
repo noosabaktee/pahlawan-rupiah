@@ -49,6 +49,12 @@
 .color-skeleton{
     --f7-theme-color: #ccc
 }
+.toast {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    min-width: fit-content;
+  }
 :root.md {
     --f7-font-family : 'Poppins', sans-serif;
 }
